@@ -1,3 +1,5 @@
+require 'rest-client'
+
 class Review < ApplicationRecord
 
     # reviews = Review.search_reviews(cuisine_id, city_id, api_key)
@@ -28,19 +30,11 @@ class Review < ApplicationRecord
         result
     end
 
-
     def self.fetch_reviews(restrurant_id, api_key)
         reviews_url = "https://developers.zomato.com/api/v2.1/reviews?res_id=#{restrurant_id}"
-        request = Net::HTTP::Get.new(reviews_url)
-        request["Accept"] = "application/json"
-        request["user-key"] = api_key
-        req_options = {
-            use_ssl: reviews_url.scheme == "https",
-        }
-        response = Net::HTTP.start(reviews_url.hostname, reviews_url.port, req_options) do |http|
-            http.request(request)
-        end
-        result = JSON.parse(response.body)
+        header = {"Accept" => "application/json", "user-key" => api_key}
+        resp = RestClient.get(reviews_url, header)
+        result = JSON.parse(resp.body)
         reviews = result["user_reviews"]
     end
 
