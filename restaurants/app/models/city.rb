@@ -18,6 +18,10 @@ class City < ApplicationRecord
             http.request(city_request)
         end
         city_info = JSON.parse(city_response.body)
+
+        if city_info["location_suggestions"].size == 0 
+            return "City not exist, try another one"
+        end
         city_id = city_info["location_suggestions"][0]["id"]
         result = {:city_info => city_info["location_suggestions"][0]}
         
