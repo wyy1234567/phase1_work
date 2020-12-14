@@ -27,12 +27,12 @@
 
 </br>
 
-#### The route is: `http://127.0.0.1:3000/city_and_cuisines/:city_name/:api_key`
+#### The route is: `http://127.0.0.1:3000/city_and_cuisines/city=:city_name/api_key=:api_key`
 
 </br>
 
-#### To get the response, replace `:city_name` with your desired city name, and replace `:api_key` with your Zomato API key. For example, the route to search New York City is: 
- `http://127.0.0.1:3000/city_and_cuisines/new york/yourzomatoapikeyhere`
+#### To get the response, replace `:city_name` with your desired city name(as a string), and replace `:api_key` with your Zomato API key. For example, the route to search New York City is: 
+ `http://127.0.0.1:3000/city_and_cuisines/city=new york/api_key=yourzomatoapikeyhere`
 
 </br>
 
@@ -67,6 +67,7 @@
             "cuisine_id": 152,
             "cuisine_name": "African"
         },
+        ....
         {
             "cuisine_id": 1,
             "cuisine_name": "American"
