@@ -1,7 +1,10 @@
 class ReviewsController < ApplicationController
 
-    # get "/reviews/:cuisine_id/:city_id/:api_key", to: "reviews#find_reviews"
+    # get "/reviews/cuisine_id=:cuisine_id/city_id=:city_id/api_key=:api_key", to: "reviews#find_reviews"
     def find_reviews
+        puts params
+
+
         cuisine_id = params[:cuisine_id]
         city_id = params[:city_id]
         api_key = params[:api_key]
