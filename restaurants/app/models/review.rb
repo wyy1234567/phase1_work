@@ -2,10 +2,10 @@ require 'rest-client'
 
 class Review < ApplicationRecord
 
-    # reviews = Review.search_reviews(cuisine_id, city_id, api_key)
     def self.search_reviews(cuisine_id, city_id, api_key)
         result = []
         invalid_key_message = "Please enter a valid Zomato API key"
+        error_message = "Restaurant you search is not found in Zomato API, please try another one"
         search_url = URI.parse("https://developers.zomato.com/api/v2.1/search?entity_id=#{city_id}&entity_type=city&count=3&cuisines=#{cuisine_id}")
         request = Net::HTTP::Get.new(search_url)
         request["Accept"] = "application/json"
@@ -21,6 +21,10 @@ class Review < ApplicationRecord
 
         if restaurants["code"] == 403
             return invalid_key_message
+        end
+
+        if restaurants["restaurants"].size == 0 
+            return error_message
         end
 
         restaurants["restaurants"].each do |res|

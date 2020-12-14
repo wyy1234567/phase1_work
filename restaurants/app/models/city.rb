@@ -1,6 +1,5 @@
 class City < ApplicationRecord
     
-    # search_result = City.fetch_info(api_key, city_name) in controller
     def self.fetch_info(api_key, city_name)
         #return a hash, has city infomation and cuisines in that city
         error_message = "City you search is not found in Zomato API, please try another one"
