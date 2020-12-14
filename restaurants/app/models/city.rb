@@ -1,9 +1,6 @@
 class City < ApplicationRecord
-    has_many :cuisines
-    
     
     # search_result = City.fetch_info(api_key, city_name) in controller
-    # https://developers.zomato.com/api/v2.1/cities?q=west%20new%20york&count=1
     def self.fetch_info(api_key, city_name)
         #return a hash, has city infomation and cuisines in that city
         result = {}

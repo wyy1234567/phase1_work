@@ -3,7 +3,6 @@ require 'rest-client'
 class Review < ApplicationRecord
 
     # reviews = Review.search_reviews(cuisine_id, city_id, api_key)
-    # https://developers.zomato.com/api/v2.1/search?entity_id=280&entity_type=city&count=5&cuisines=1
     def self.search_reviews(cuisine_id, city_id, api_key)
         result = []
         search_url = URI.parse("https://developers.zomato.com/api/v2.1/search?entity_id=#{city_id}&entity_type=city&count=3&cuisines=#{cuisine_id}")
