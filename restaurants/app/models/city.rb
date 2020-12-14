@@ -3,6 +3,8 @@ class City < ApplicationRecord
     # search_result = City.fetch_info(api_key, city_name) in controller
     def self.fetch_info(api_key, city_name)
         #return a hash, has city infomation and cuisines in that city
+        error_message = "City you search is not found in Zomato API, please try another one"
+        invalid_key_message = "Please enter a valid Zomato API key"
         result = {}
         city_url = URI.parse("https://developers.zomato.com/api/v2.1/cities?q=#{city_name}&count=1")
         city_request = Net::HTTP::Get.new(city_url)
@@ -16,8 +18,14 @@ class City < ApplicationRecord
         end
         city_info = JSON.parse(city_response.body)
 
+
+        if city_info["code"] == 403
+            return invalid_key_message
+        end
+
+
         if city_info["location_suggestions"].size == 0 
-            return "City not exist, try another one"
+            return error_message
         end
         city_id = city_info["location_suggestions"][0]["id"]
         result = {:city_info => city_info["location_suggestions"][0]}
