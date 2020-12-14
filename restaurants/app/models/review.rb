@@ -26,12 +26,13 @@ class Review < ApplicationRecord
         restaurants["restaurants"].each do |res|
             res_and_reviews = {}
             res_id = res["restaurant"]["R"]["res_id"]
+            res["restaurant"].except!("all_reviews")
             res_and_reviews = {:restaurant_info => res["restaurant"]}
             reviews = Review.fetch_reviews(res_id, api_key)
             res_and_reviews.merge!({:reviews => reviews})
             result << res_and_reviews
         end
-        
+
         result
     end
 
