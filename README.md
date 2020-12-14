@@ -82,15 +82,15 @@
 
 </br>
 
-#### It requests a cuisine ID, city ID, and your Zomato API key. It will return the first three restaurants that meet the cuisine type in the given city, and it's corresponding reviews.
+#### It requests a cuisine ID, city ID, and your Zomato API key. It will return the first three restaurants that match the cuisine type in the given city, and it's corresponding infomation and reviews.
 
 </br>
 
-#### The route is: `http://127.0.0.1:3000/reviews/:cuisine_id/:city_id/:api_key`
+#### The route is: `http://127.0.0.1:3000/reviews/cuisine_id=:cuisine_id/city_id=:city_id/api_key=:api_key`
 
 </br>
 
-#### To get the response, replace `:cuisine_id` with a cuisine ID number, replace `:city_id` with a city ID number, replace `:api_key` with your Zomato API key. Enter the route in your browser or make a GET request in Postman, you'll get the result. For example, to search for American style retaurants in New York City, you can try route: `http://127.0.0.1:3000/reviews/1/280/yourzomatoapikeyhere`
+#### To get the response, replace `:cuisine_id` with a cuisine ID number, replace `:city_id` with a city ID number, replace `:api_key` with your Zomato API key. Enter the route in your browser or make a GET request in Postman, you'll get the result. For example, to search for American style retaurants in New York City, you can try route: `http://127.0.0.1:3000/reviews/cuisine_id=1/city_id=280/api_key=yourzomatoapikeyhere`
 
 </br>
 
