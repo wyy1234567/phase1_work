@@ -25,6 +25,14 @@ class City < ApplicationRecord
         city_id = city_info["location_suggestions"][0]["id"]
         result = {:city_info => city_info["location_suggestions"][0]}
         
+        cuisine_list = City.city_cuisines(city_id, api_key)
+        result.merge!({:cuisines => cuisine_list})
+        result
+    end
+
+
+    def self.city_cuisines(city_id, api_key)
+
         cuisine_url = URI.parse("https://developers.zomato.com/api/v2.1/cuisines?city_id=#{city_id}")
         cuisine_request = Net::HTTP::Get.new(cuisine_url)
         cuisine_request["Accept"] = "application/json"
@@ -41,7 +49,8 @@ class City < ApplicationRecord
         cuisines["cuisines"].each do |hash|
             cuisine_list << hash["cuisine"]
         end
-        result.merge!({:cuisines => cuisine_list})
-        result
+
+        cuisine_list
     end
+
 end
